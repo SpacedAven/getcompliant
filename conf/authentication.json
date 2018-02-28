@@ -20,7 +20,19 @@
                 "properties" : {
                     "queryOnResource" : "repo/internal/user",
                     "username" : "anonymous",
-                    "password" : "anonymous",
+                    "password" : {
+                        "$crypto" : {
+                            "type" : "x-simple-encryption",
+                            "value" : {
+                                "cipher" : "AES/CBC/PKCS5Padding",
+                                "salt" : "FEaA0hTZrtmkhCGjbg1U6A==",
+                                "data" : "1RYO4BAcz+hmGr5K3WINog==",
+                                "iv" : "62VZhnw8JhXRY8u4JyWDMw==",
+                                "key" : "openidm-sym-default",
+                                "mac" : "ykUfXoCgH53oLKEFjRc0sA=="
+                            }
+                        }
+                    },
                     "defaultUserRoles" : [
                         "openidm-reg"
                     ]
@@ -30,7 +42,7 @@
             {
                 "name" : "MANAGED_USER",
                 "properties" : {
-                    "augmentSecurityContext": {
+                    "augmentSecurityContext" : {
                         "type" : "text/javascript",
                         "source" : "require('auth/customAuthz').setProtectedAttributes(security)"
                     },
